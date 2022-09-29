@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Airtable from 'airtable'
 import { useEffect } from 'react';
-import BlogCard from '../../components/BlogCard';
+import BlogCard from '../../components/BlogCard/BlogCard';
 
 const base = new Airtable({ apiKey: "keyIFFzaIXD9tzQwH" }).base('appeS7JqbqChh9tHv');
 
