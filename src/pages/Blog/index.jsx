@@ -16,17 +16,19 @@ function Blog() {
                 if (err) {
                     console.error(err); return;
                 }
-                console.log(record.fields)
+                // console.log(record.fields)
                 setPost(record.fields)
-            });    
+            }
+            );    
     }, [params.id])
 
-
+    console.log(post)
     return (
         <div>
             Blog
+            
+            {/* <h4>{post.title}</h4> */}
         </div>
-
     )
 }
 

@@ -1,0 +1,79 @@
+.card {
+    margin-top: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+  }
+  
+  .card h2 {
+    cursor: pointer;
+    padding: 0.5rem 0rem;
+    font-size: 1.375em;
+    color: #292929;
+  }
+  
+  .card h3 {
+    font-size: 0.8em;
+    font-weight: lighter;
+    color: #757575;
+  }
+  
+  .imgContainer img {
+    position: relative;
+    max-width: 25vh;
+    height: 25vh;
+  }
+  
+  .card img:hover {
+    opacity: 0.8;
+  }
+  
+  .card img {
+    object-fit: cover;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+  
+  .details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.5rem 0rem;
+  }
+  
+  .text {
+    margin-top: 1rem;
+  }
+  
+  .author {
+    display: flex;
+    align-items: center;
+  }
+  
+  .author img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .card {
+      margin: 0rem 0.5rem;
+    }
+    .imgContainer {
+      display: flex;
+      align-items: center;
+    }
+  
+    .imgContainer img {
+      position: relative;
+      width: 12vh;
+      height: 12vh;
+      margin: 0.5em;
+    }
+    .card h2 {
+      font-size: 1em;
+    }
+  }

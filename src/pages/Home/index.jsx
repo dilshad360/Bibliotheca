@@ -19,7 +19,7 @@ function Home() {
 
     return (
         <div>
-        <h1>Home</h1>
+        <h1>Writer Blog</h1>
         {posts.map(post => (
             <BlogCard 
             key={post.id}
