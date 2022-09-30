@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useParams } from "react-router";
 import styles from "./styles.module.css"
 import moment from "moment";
+import Loader from "../../components/Loader/Loader";
+
 
 const base = new Airtable({ apiKey: "keyIFFzaIXD9tzQwH" }).base(
   "appeS7JqbqChh9tHv"
@@ -53,7 +55,7 @@ function Blog() {
         {post.content}
       </div>
       </div>
-      : 'loading...' }
+      : <Loader/> }
       </main>
   );
 }
