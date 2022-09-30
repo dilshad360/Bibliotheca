@@ -1,15 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import moment from "moment";
 
 function BlogCard({ post, id }) {
-  // console.log(post.fields.)
+  console.log(post.fields.coverPhoto[0].thumbnails.small)
   return (
     <Link to={`/blog/${id}`}>
       <div className={styles.card}>
         <div>
           <div className={styles.author}>
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt=""/>
+            <img src="https://i.pinimg.com/736x/2a/40/6b/2a406bf58db22cc7818ad1ff48c158cf.jpg" alt=""/>
             <h3>{post.fields.author}</h3>
           </div>
           <div className={styles.text}>
@@ -17,12 +18,12 @@ function BlogCard({ post, id }) {
           </div>
           <div className={styles.details}>
             <div className={styles.date}>
-              <h3>{post.fields.date_published}</h3>
+              <h3>{moment(post.datePublished).format("MMM d, YYYY")}</h3>
             </div>
           </div>
         </div>
         <div className={styles.imgContainer}>
-          <img src="https://miro.medium.com/max/1100/1*7-yDlZrKZRbaA5f-Jcq-qw.jpeg" alt="" />
+          <img src={post.fields.coverPhoto[0].thumbnails.large.url} alt="" />
         </div>
       </div>
     </Link>

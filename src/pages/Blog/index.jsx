@@ -3,6 +3,7 @@ import Airtable from "airtable";
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import styles from "./styles.module.css"
+import moment from "moment";
 
 const base = new Airtable({ apiKey: "keyIFFzaIXD9tzQwH" }).base(
   "appeS7JqbqChh9tHv"
@@ -18,35 +19,42 @@ function Blog() {
         console.error(err);
         return;
       }
-      // console.log(record.fields)
       setPost(record.fields);
     });
   }, [params.id]);
 
-  console.log(post);
+  // console.warn(post.coverPhoto[0].url);
   return (
+    
+    
     <main className={styles.blog}>
+    {post?
+    <div>
+
       <img
-        src="https://miro.medium.com/max/1400/1*7-yDlZrKZRbaA5f-Jcq-qw.jpeg"
+        src={post.coverPhoto[0].url}
         className={styles.cover}
         alt=""
-      />
+        />
       <div className={styles.title}>
         <div className={styles.authdetails}>
-          {/* <img src={post.author.avatar.url} alt="" /> */}
+          <img src="https://i.pinimg.com/736x/2a/40/6b/2a406bf58db22cc7818ad1ff48c158cf.jpg" alt="" />
           <div className={styles.authtext}>
-            {/* <h4>{post.author.name}</h4> */}
-            {/* <h6>{moment(post.datePublished).format("MMM d, YYYY")}</h6> */}
+            <h4>{post.author}</h4>
+            <h6>{moment(post.datePublished).format("MMM d, YYYY")}</h6>
           </div>
         </div>
-        {/* <h2>{post.title}</h2> */}
+         <h2>{post.title}</h2> 
       </div>
-
+      
       <div
-        className={styles.content}
-        // dangerouslySetInnerHTML={{ __html: post.content.html }}
-      ></div>
-    </main>
+      className={styles.content}
+      >
+        {post.content}
+      </div>
+      </div>
+      : 'loading...' }
+      </main>
   );
 }
 
