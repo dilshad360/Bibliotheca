@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/bibliotheca/static/css/main.d54a83cf.css",
+    "main.js": "/bibliotheca/static/js/main.1f08f552.js",
+    "static/media/connect_logo.svg": "/bibliotheca/static/media/connect_logo.9cca721bb44d34051f9ed60c7a583356.svg",
+    "index.html": "/bibliotheca/index.html",
+    "main.d54a83cf.css.map": "/bibliotheca/static/css/main.d54a83cf.css.map",
+    "main.1f08f552.js.map": "/bibliotheca/static/js/main.1f08f552.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d54a83cf.css",
+    "static/js/main.1f08f552.js"
+  ]
+}
