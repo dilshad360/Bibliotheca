@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/bibliotheca/static/css/main.84eee2d4.css",
+    "main.css": "/bibliotheca/static/css/main.808fb484.css",
     "main.js": "/bibliotheca/static/js/main.4898bd6a.js",
     "static/media/connect_logo.svg": "/bibliotheca/static/media/connect_logo.9cca721bb44d34051f9ed60c7a583356.svg",
     "index.html": "/bibliotheca/index.html",
-    "main.84eee2d4.css.map": "/bibliotheca/static/css/main.84eee2d4.css.map",
+    "main.808fb484.css.map": "/bibliotheca/static/css/main.808fb484.css.map",
     "main.4898bd6a.js.map": "/bibliotheca/static/js/main.4898bd6a.js.map"
   },
   "entrypoints": [
-    "static/css/main.84eee2d4.css",
+    "static/css/main.808fb484.css",
     "static/js/main.4898bd6a.js"
   ]
 }
