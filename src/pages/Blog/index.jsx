@@ -3,7 +3,7 @@ import Airtable from "airtable";
 import { useParams } from "react-router";
 import styles from "./styles.module.css";
 import moment from "moment";
-import Loader from "../../components/Loader/Loader";
+import BlogSkeleton from "../../components/Skeleton/BlogSkeleton";
 import backendUrl from "../../const/backendUrl";
 // import noProfile from "../../assets/no_profile.jpg";
 
@@ -64,7 +64,7 @@ function Blog() {
           ></div>
         </div>
       ) : (
-        <Loader />
+        <BlogSkeleton/>
       )}
     </main>
   );

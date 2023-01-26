@@ -1,0 +1,23 @@
+
+.book {
+ display: flex;
+}
+
+.cover{
+  margin: 0 32px 0 32px;
+}
+
+.content{
+  margin-top: 1rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    .book{
+        display: flex;
+        flex-direction: column;
+    }
+    .details {
+      margin-top: 1rem;
+  }
+}

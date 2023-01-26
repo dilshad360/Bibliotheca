@@ -5,6 +5,8 @@ import App from './App';
 import { HashRouter } from "react-router-dom";
 import NavBar from './layouts/NavBar/NavBar';
 import Footer from './layouts/Footer/Footer';
+import "react-loading-skeleton/dist/skeleton.css";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

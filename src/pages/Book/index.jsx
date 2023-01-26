@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Airtable from "airtable";
 import backendUrl from "../../const/backendUrl";
-import Loader from "../../components/Loader/Loader";
 import styles from "./styles.module.css";
+import BookSkeleton from "../../components/Skeleton/BookSkeleton";
 
 const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
   `${backendUrl.airtableBase}`
@@ -42,7 +42,7 @@ function Book() {
           </div>
         </div>
       ) : (
-        <Loader />
+        <BookSkeleton/>
       )}
     </div>
   );

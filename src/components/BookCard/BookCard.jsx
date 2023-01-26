@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import Airtable from "airtable";
 import backendUrl from "../../const/backendUrl";
-import Loader from "../Loader/Loader";
+import BookCardSkeleton from "../Skeleton/BookCardSkeleton";
 
 const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
   `${backendUrl.airtableBase}`
@@ -61,7 +61,9 @@ function BookCard() {
           ))}
         </ul>
       ) : (
-        <Loader />
+        <div className={styles.books}>
+        <BookCardSkeleton cards={3}/>
+        </div>
       )}
 
     </div>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Airtable from "airtable";
 import BlogCard from "../../components/BlogCard/BlogCard";
-import Loader from "../../components/Loader/Loader";
 import backendUrl from "../../const/backendUrl";
 import styles from "./styles.module.css";
 import Hero from "../../components/Hero/Hero";
 import BookCard from "../../components/BookCard/BookCard";
+import BlogCardSkeleton from "../../components/Skeleton/BlogCardSkeleton";
 
 const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
   `${backendUrl.airtableBase}`
@@ -59,8 +59,10 @@ function Home() {
             <BlogCard key={post.id} id={post.id} post={post} />
           ))}
         </div>
-      ) : (
-        <Loader />
+      ) : (      
+        <div className={styles.posts}>
+        <BlogCardSkeleton cards={6}/>
+        </div>
         )}
         </div>
         <BookCard/>
