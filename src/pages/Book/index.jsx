@@ -15,7 +15,7 @@ function Book() {
 
   useEffect(() => {
     getBook();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getBook = async () => {
@@ -28,21 +28,34 @@ function Book() {
     });
   };
 
+  const handleBuy = (title) => {
+    const searchTitle = title.replace(/\s/g, "+");
+    const link = `https://www.google.com/search?q=${searchTitle}&source=lnms&tbm=shop`;
+    window.open(link, "_blank");
+  };
+
   return (
     <div className={styles.main}>
       {book ? (
         <div className={styles.book}>
-          <img src={book.coverPhoto[0].url} className="" alt="" />
+          <img src={book.coverPhoto[0].url} alt={book.title} />
           <div className={styles.details}>
             <h2>{book.title}</h2>
-            <h5><span>Author:</span> {book.author}</h5>
-            <p
-            dangerouslySetInnerHTML={{ __html: book.content }}
-            ></p>
+            <h5>
+              <span>Author:</span> {book.author}
+            </h5>
+            <p dangerouslySetInnerHTML={{ __html: book.content }}></p>
+            <button
+              onClick={() => {
+                handleBuy(book.title);
+              }}
+            >
+              Buy
+            </button>
           </div>
         </div>
       ) : (
-        <BookSkeleton/>
+        <BookSkeleton />
       )}
     </div>
   );
