@@ -12,6 +12,7 @@ const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
 );
 
 function Home() {
+  
   const [posts, setPosts] = useState([]);
   
   useEffect(() => {

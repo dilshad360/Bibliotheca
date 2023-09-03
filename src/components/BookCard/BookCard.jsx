@@ -20,7 +20,7 @@ function BookCard() {
 
   const getBooks = async () => {
 
-    const check = sessionStorage.getItem('books');
+    const check = sessionStorage.getItem('books'); 
 
     if (check) {
       setBooks(JSON.parse(check));
@@ -54,6 +54,7 @@ function BookCard() {
                   className={styles.bookCover}
                   src={book.fields.coverPhoto[0].url}
                   alt={book.fields.title}
+                  loading="lazy"
                   onClick={() => {navigate(`/book/${book.id}`)}}
                   />
               {/* <h5>{book.fields.title}</h5> */}

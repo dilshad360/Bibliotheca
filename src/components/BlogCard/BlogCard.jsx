@@ -13,6 +13,7 @@ function BlogCard({ post, id }) {
           <img
             src={post.fields.coverPhoto[0].thumbnails.large.url}
             alt=""
+            loading="lazy"
           />
           }
         </div>
