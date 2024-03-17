@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import styles from "./styles.module.css";
-import Airtable from "airtable";
 // import backendUrl from "../../const/backendUrl";
 import department from "../../const/departmentList";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { writePost } from "../../utils/airtableService";
 
 // const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
 //   `${backendUrl.airtableBase}`
@@ -23,17 +23,17 @@ function Write() {
     phone: "",
     department: "",
     year: "",
-    status: "NEW"
+    status: "NEW",
   });
 
-  const [contentEmpty, setcontentEmpty] = useState(false)
+  const [contentEmpty, setcontentEmpty] = useState(false);
 
   const handleTitle = (e) => {
     setValues({ ...values, title: e.target.value });
   };
   const handleContent = (e) => {
     setValues({ ...values, content: e });
-    setcontentEmpty(false)
+    setcontentEmpty(false);
   };
   const handleAuthor = (e) => {
     setValues({ ...values, author: e.target.value });
@@ -51,13 +51,25 @@ function Write() {
     setValues({ ...values, year: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!values.content|| values.content==="<p><br></p>"){
-      setcontentEmpty(true)
+    if (!values.content || values.content === "<p><br></p>") {
+      setcontentEmpty(true);
       notifyWarning();
       return;
     }
+
+    try {
+      const tableName = "Blog";
+      const res = await writePost(tableName, values);
+
+      notifySuccess();
+      clearForm();
+    } catch (err) {
+      console.error(err);
+      notifyError();
+    }
+
     // base("Blog").create(
     //   [
     //     {
@@ -92,7 +104,7 @@ function Write() {
   const clearForm = () => {
     setValues({
       ...values,
-      title: "", 
+      title: "",
       // content: "\n",
       author: "",
       department: "",
@@ -100,7 +112,6 @@ function Write() {
       email: "",
       phone: "",
     });
-    // console.log(values)
   };
 
   return (
@@ -118,7 +129,9 @@ function Write() {
         <select value={values.department} onChange={handleDepartment} required>
           <option>Select your department</option>
           {department.map((dept) => (
-            <option value={dept.value} key={dept.value} >{dept.value}</option>
+            <option value={dept.value} key={dept.value}>
+              {dept.value}
+            </option>
           ))}
         </select>
         <label>Join year</label>
@@ -146,7 +159,7 @@ function Write() {
           onChange={handlePhone}
           required
         />
-         <label>Title</label>
+        <label>Title</label>
         <input
           type="text"
           placeholder="Title of your post"
@@ -155,7 +168,9 @@ function Write() {
           required
         />
         <label>Content</label>
-        {contentEmpty && <p className={styles.contentEmpty}>You forgot to enter the content</p>}
+        {contentEmpty && (
+          <p className={styles.contentEmpty}>You forgot to enter the content</p>
+        )}
         <ReactQuill
           className={styles.editor}
           modules={modules}

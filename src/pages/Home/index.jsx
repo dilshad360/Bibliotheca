@@ -34,8 +34,7 @@ function Home() {
           sortField,
           sortDirection
         );
-        console.log(Records);
-
+      console.log(Records);
           setPosts(Records);
       } catch (error) {
         console.error(error);

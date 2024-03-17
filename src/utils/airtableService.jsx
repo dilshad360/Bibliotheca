@@ -35,3 +35,15 @@ export const fetchRecordById = async (tableName, recordId) => {
         throw error;
     }
 };
+
+export const writePost = async (tableName, data) => {
+    try {
+        const response = await axiosInstance.post(`/${tableName}`, {
+            fields: data,
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error writing data", error);
+        throw error;
+    }
+}
