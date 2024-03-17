@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Airtable from "airtable";
 import BlogCard from "../../components/BlogCard/BlogCard";
-import backendUrl from "../../const/backendUrl";
 import styles from "./styles.module.css";
 import Hero from "../../components/Hero/Hero";
 import BookCard from "../../components/BookCard/BookCard";
 import BlogCardSkeleton from "../../components/Skeleton/BlogCardSkeleton";
+import { fetchRecords } from "../../utils/airtableService";
 
-const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
-  `${backendUrl.airtableBase}`
-);
 
 function Home() {
   
@@ -27,21 +23,39 @@ function Home() {
       setPosts(JSON.parse(check));
     } else {
 
-      base("Blog")
-      .select({ view: "Published" })
-      .eachPage(
-        (records, fetchNextPage) => {
-          sessionStorage.setItem("posts", JSON.stringify(records));
-          setPosts(records);
-          fetchNextPage();
-        },
-        function done(err) {
-          if (err) {
-            console.error(err);
-            return;
-          }
-        }
-      );
+      try {
+        const tableName = "Blog";
+        const filterBy = "{status} = 'Published'";
+        const sortField = "auto";
+        const sortDirection = "desc";
+        const Records = await fetchRecords(
+          tableName,
+          filterBy,
+          sortField,
+          sortDirection
+        );
+        console.log(Records);
+
+          setPosts(Records);
+      } catch (error) {
+        console.error(error);
+      }
+
+      // base("Blog")
+      // .select({ view: "Published" })
+      // .eachPage(
+      //   (records, fetchNextPage) => {
+      //     sessionStorage.setItem("posts", JSON.stringify(records));
+      //     setPosts(records);
+      //     fetchNextPage();
+      //   },
+      //   function done(err) {
+      //     if (err) {
+      //       console.error(err);
+      //       return;
+      //     }
+      //   }
+      // );
 
       
 

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Airtable from "airtable";
+
 import { useParams } from "react-router";
 import styles from "./styles.module.css";
 import moment from "moment";
 import BlogSkeleton from "../../components/Skeleton/BlogSkeleton";
-import backendUrl from "../../const/backendUrl";
+import { fetchRecordById } from "../../utils/airtableService";
+
 // import noProfile from "../../assets/no_profile.jpg";
 
-const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
-  `${backendUrl.airtableBase}`
-);
+// const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
+//   `${backendUrl.airtableBase}`
+// );
 
 function Blog() {
   const params = useParams();
@@ -21,13 +22,29 @@ function Blog() {
   }, []);
 
   const getPost = async () => {
-    base("Blog").find(`${params.id}`, (err, record) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
+
+    try {
+      const tableName = "Blog";
+      const recordId = `${params.id}`;
+      const record = await fetchRecordById(
+        tableName,
+        recordId
+      );
       setPost(record.fields);
-    });
+    } catch (error) {
+      console.error(error);
+    }
+
+
+    // base("Blog").find(`${params.id}`, (err, record) => {
+    //   if (err) {
+    //     console.error(err);
+    //     return;
+    //   }
+    //   setPost(record.fields);
+    // });
+
+
   };
 
   return (

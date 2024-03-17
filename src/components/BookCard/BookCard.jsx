@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
-import Airtable from "airtable";
-import backendUrl from "../../const/backendUrl";
 import BookCardSkeleton from "../Skeleton/BookCardSkeleton";
+import { fetchRecords } from "../../utils/airtableService";
 
-const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
-  `${backendUrl.airtableBase}`
-);
 
 function BookCard() {
 
@@ -25,22 +21,43 @@ function BookCard() {
     if (check) {
       setBooks(JSON.parse(check));
     } else {
-      base("Book")
-      .select({ view: "Published" })
-      .eachPage(
-        (records, fetchNextPage) => {
-          sessionStorage.setItem("books", JSON.stringify(records));
-          setBooks(records);
-          fetchNextPage();
-        },
-        function done(err) {
-          if (err) {
-            console.error(err);
-            return;
-          }
-        }
-      );
+
+      try {
+        const tableName = "Book";
+        const filterBy = "{status} = 'Published'";
+        const sortField = "auto";
+        const sortDirection = "desc";
+        const Records = await fetchRecords(
+          tableName,
+          filterBy,
+          sortField,
+          sortDirection
+        );
+
+          setBooks(Records);
+      } catch (error) {
+        console.error(error);
+      }
+
+
+      // base("Book")
+      // .select({ view: "Published" })
+      // .eachPage(
+      //   (records, fetchNextPage) => {
+      //     sessionStorage.setItem("books", JSON.stringify(records));
+      //     setBooks(records);
+      //     fetchNextPage();
+      //   },
+      //   function done(err) {
+      //     if (err) {
+      //       console.error(err);
+      //       return;
+      //     }
+      //   }
+      // );
     }
+
+
   };
 
   return (

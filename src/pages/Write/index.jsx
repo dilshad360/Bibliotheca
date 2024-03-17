@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import styles from "./styles.module.css";
 import Airtable from "airtable";
-import backendUrl from "../../const/backendUrl";
+// import backendUrl from "../../const/backendUrl";
 import department from "../../const/departmentList";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,9 +10,9 @@ import "react-toastify/dist/ReactToastify.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
-  `${backendUrl.airtableBase}`
-);
+// const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
+//   `${backendUrl.airtableBase}`
+// );
 
 function Write() {
   const [values, setValues] = useState({
@@ -58,22 +58,22 @@ function Write() {
       notifyWarning();
       return;
     }
-    base("Blog").create(
-      [
-        {
-          fields: values,
-        },
-      ],
-      function (err, records) {
-        if (err) {
-          console.error(err);
-          notifyError();
-          return;
-        }
-        notifySuccess();
-        clearForm();
-      }
-    );
+    // base("Blog").create(
+    //   [
+    //     {
+    //       fields: values,
+    //     },
+    //   ],
+    //   function (err, records) {
+    //     if (err) {
+    //       console.error(err);
+    //       notifyError();
+    //       return;
+    //     }
+    //     notifySuccess();
+    //     clearForm();
+    //   }
+    // );
   };
 
   const modules = {
