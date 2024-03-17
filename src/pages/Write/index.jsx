@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import styles from "./styles.module.css";
-// import backendUrl from "../../const/backendUrl";
 import department from "../../const/departmentList";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,9 +9,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { writePost } from "../../utils/airtableService";
 
-// const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
-//   `${backendUrl.airtableBase}`
-// );
 
 function Write() {
   const [values, setValues] = useState({
@@ -70,22 +66,6 @@ function Write() {
       notifyError();
     }
 
-    // base("Blog").create(
-    //   [
-    //     {
-    //       fields: values,
-    //     },
-    //   ],
-    //   function (err, records) {
-    //     if (err) {
-    //       console.error(err);
-    //       notifyError();
-    //       return;
-    //     }
-    //     notifySuccess();
-    //     clearForm();
-    //   }
-    // );
   };
 
   const modules = {

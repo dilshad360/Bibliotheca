@@ -6,45 +6,24 @@ import moment from "moment";
 import BlogSkeleton from "../../components/Skeleton/BlogSkeleton";
 import { fetchRecordById } from "../../utils/airtableService";
 
-// import noProfile from "../../assets/no_profile.jpg";
-
-// const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
-//   `${backendUrl.airtableBase}`
-// );
-
 function Blog() {
   const params = useParams();
   const [post, setPost] = useState();
 
   useEffect(() => {
     getPost();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getPost = async () => {
-
     try {
       const tableName = "Blog";
       const recordId = `${params.id}`;
-      const record = await fetchRecordById(
-        tableName,
-        recordId
-      );
+      const record = await fetchRecordById(tableName, recordId);
       setPost(record.fields);
     } catch (error) {
       console.error(error);
     }
-
-
-    // base("Blog").find(`${params.id}`, (err, record) => {
-    //   if (err) {
-    //     console.error(err);
-    //     return;
-    //   }
-    //   setPost(record.fields);
-    // });
-
-
   };
 
   return (
@@ -81,7 +60,7 @@ function Blog() {
           ></div>
         </div>
       ) : (
-        <BlogSkeleton/>
+        <BlogSkeleton />
       )}
     </main>
   );

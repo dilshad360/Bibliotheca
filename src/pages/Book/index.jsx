@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import Airtable from "airtable";
-// import backendUrl from "../../const/backendUrl";
 import styles from "./styles.module.css";
 import BookSkeleton from "../../components/Skeleton/BookSkeleton";
 import { fetchRecordById } from "../../utils/airtableService";
-
-// const base = new Airtable({ apiKey: `${backendUrl.secretKey}` }).base(
-//   `${backendUrl.airtableBase}`
-// );
 
 function Book() {
   const params = useParams();
@@ -20,28 +14,14 @@ function Book() {
   }, []);
 
   const getBook = async () => {
-
-
     try {
       const tableName = "Book";
       const recordId = `${params.id}`;
-      const record = await fetchRecordById(
-        tableName,
-        recordId
-      );
+      const record = await fetchRecordById(tableName, recordId);
       setBook(record.fields);
     } catch (error) {
       console.error(error);
     }
-
-
-    // base("Book").find(`${params.id}`, (err, record) => {
-    //   if (err) {
-    //     console.error(err);
-    //     return;
-    //   }
-    //   setBook(record.fields);
-    // });
   };
 
   const handleBuy = (title) => {

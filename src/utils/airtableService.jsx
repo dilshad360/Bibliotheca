@@ -9,16 +9,16 @@ const axiosInstance = axios.create({
     },
 });
 
-export const fetchRecords = async (tableName, filterParams, sortField, sortDirection, maxRecords) => {
+export const fetchRecords = async (
+    tableName,
+    filterParams,
+) => {
     try {
         const response = await axiosInstance.get(`/${tableName}`, {
             params: {
-                filterByFormula: filterParams, 
-                // 'sort[0][field]': `${sortField}`,
-                // 'sort[0][direction]': `${sortDirection}`,
-                // maxRecords: `${maxRecords}`
+                filterByFormula: filterParams,
             },
-            });
+        });
         return response.data.records;
     } catch (error) {
         console.error("Error fetching records:", error);
@@ -46,4 +46,4 @@ export const writePost = async (tableName, data) => {
         console.error("Error writing data", error);
         throw error;
     }
-}
+};
